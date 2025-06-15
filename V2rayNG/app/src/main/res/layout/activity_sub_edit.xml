@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.SubSettingActivity">
+    android:fitsSystemWindows="true"
+    tools:context=".ui.SubEditActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/layout_margin_top_height">
+            android:padding="@dimen/padding_spacing_dp16">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -24,14 +26,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/title_server"
+                    android:text="@string/title_sub_setting"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/layout_margin_top_height"
+                android:layout_marginTop="@dimen/padding_spacing_dp16"
                 android:orientation="vertical">
 
                 <TextView
@@ -42,7 +44,7 @@
                 <EditText
                     android:id="@+id/et_remarks"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/edit_height"
+                    android:layout_height="wrap_content"
                     android:inputType="text" />
 
             </LinearLayout>
@@ -50,7 +52,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/layout_margin_top_height"
+                android:layout_marginTop="@dimen/padding_spacing_dp16"
                 android:orientation="vertical">
 
                 <TextView
@@ -75,7 +77,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/layout_margin_top_height"
+                android:layout_marginTop="@dimen/padding_spacing_dp16"
                 android:orientation="vertical">
 
                 <TextView
@@ -86,7 +88,7 @@
                 <EditText
                     android:id="@+id/et_filter"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/edit_height"
+                    android:layout_height="wrap_content"
                     android:inputType="text" />
 
             </LinearLayout>
@@ -94,7 +96,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/layout_margin_top_height"
+                android:layout_marginTop="@dimen/padding_spacing_dp16"
                 android:orientation="horizontal">
 
                 <TextView
@@ -107,15 +109,16 @@
                     android:id="@+id/chk_enable"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="@dimen/padding_start"
-                    android:paddingEnd="@dimen/padding_end" />
+                    android:paddingStart="@dimen/padding_spacing_dp16"
+                    android:paddingEnd="@dimen/padding_spacing_dp16"
+                    app:theme="@style/BrandedSwitch" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/layout_margin_top_height"
+                android:layout_marginTop="@dimen/padding_spacing_dp16"
                 android:orientation="horizontal">
 
                 <TextView
@@ -129,15 +132,38 @@
                     android:id="@+id/auto_update_check"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="@dimen/padding_start"
-                    android:paddingEnd="@dimen/padding_end" />
+                    android:paddingStart="@dimen/padding_spacing_dp16"
+                    android:paddingEnd="@dimen/padding_spacing_dp16"
+                    app:theme="@style/BrandedSwitch" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/layout_margin_top_height"
+                android:layout_marginTop="@dimen/padding_spacing_dp16"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:text="@string/sub_allow_insecure_url" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/allow_insecure_url"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/padding_spacing_dp16"
+                    android:paddingEnd="@dimen/padding_spacing_dp16"
+                    app:theme="@style/BrandedSwitch" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding_spacing_dp16"
                 android:orientation="vertical">
 
                 <TextView
@@ -148,16 +174,16 @@
                 <EditText
                     android:id="@+id/et_pre_profile"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/edit_height"
-                    android:inputType="text"
-                    android:hint="@string/sub_setting_pre_profile_tip" />
+                    android:layout_height="wrap_content"
+                    android:hint="@string/sub_setting_pre_profile_tip"
+                    android:inputType="text" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/layout_margin_top_height"
+                android:layout_marginTop="@dimen/padding_spacing_dp16"
                 android:orientation="vertical">
 
                 <TextView
@@ -168,9 +194,9 @@
                 <EditText
                     android:id="@+id/et_next_profile"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/edit_height"
-                    android:inputType="text"
-                    android:hint="@string/sub_setting_pre_profile_tip" />
+                    android:layout_height="wrap_content"
+                    android:hint="@string/sub_setting_pre_profile_tip"
+                    android:inputType="text" />
 
             </LinearLayout>
         </LinearLayout>
@@ -178,8 +204,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/layout_margin_top_height"
-            android:layout_marginTop="@dimen/layout_margin_top_height"
+            android:layout_marginTop="@dimen/padding_spacing_dp16"
+            android:layout_marginBottom="@dimen/padding_spacing_dp16"
             android:orientation="vertical" />
 
     </LinearLayout>

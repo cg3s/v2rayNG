@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
         android:orientation="vertical">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -24,8 +24,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true">
+            android:layout_height="match_parent">
 
             <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:id="@+id/main_content"
@@ -39,45 +38,52 @@
 
                     <com.google.android.material.progressindicator.LinearProgressIndicator
                         android:id="@+id/pb_waiting"
-                        app:indicatorColor="@color/color_fab_active"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:indeterminate="true"
-                        android:visibility="invisible" />
+                        android:visibility="invisible"
+                        app:indicatorColor="@color/color_fab_active" />
 
                     <com.google.android.material.tabs.TabLayout
                         android:id="@+id/tab_group"
-                        app:tabMode="scrollable"
-                        app:tabTextAppearance="@style/TabLayoutTextStyle"
-                        app:tabIndicatorFullWidth="false"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_width="match_parent" />
+                        android:padding="@dimen/padding_spacing_dp8"
+                        app:tabIndicatorFullWidth="false"
+                        app:tabMode="scrollable"
+                        app:tabTextAppearance="@style/TabLayoutTextStyle" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_view"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:nextFocusRight="@+id/fab" />
+                        android:nextFocusRight="@+id/fab"
+                        android:scrollbars="vertical" />
 
                     <LinearLayout
                         android:id="@+id/layout_test"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/connection_test_height"
-                        android:background="@color/colorPrimary"
-                        android:gravity="center|start"
-                        android:nextFocusRight="@+id/fab"
+                        android:layout_height="@dimen/view_height_dp64"
                         android:clickable="true"
                         android:focusable="true"
-                        android:nextFocusLeft="@+id/recycler_view">
+                        android:nextFocusLeft="@+id/recycler_view"
+                        android:nextFocusRight="@+id/fab"
+                        android:orientation="vertical">
+
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="1dp"
+                            android:background="@color/divider_color_light" />
 
                         <TextView
                             android:id="@+id/tv_test_state"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="start|center"
                             android:maxLines="2"
                             android:minLines="1"
-                            android:paddingStart="@dimen/padding_start"
+                            android:paddingStart="@dimen/padding_spacing_dp16"
                             android:text="@string/connection_test_pending"
                             android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
@@ -85,27 +91,21 @@
                 </LinearLayout>
 
                 <FrameLayout
-                    android:id="@+id/fabProgressCircle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|end"
-                    android:layout_marginBottom="12dp">
+                    android:layout_marginEnd="@dimen/padding_spacing_dp16">
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/fab"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"
                         android:layout_gravity="bottom|end"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="@dimen/view_height_dp36"
                         android:clickable="true"
                         android:focusable="true"
                         android:nextFocusLeft="@+id/layout_test"
-                        android:src="@drawable/ic_stat_name"
+                        android:src="@drawable/ic_play_24dp"
                         app:layout_anchorGravity="bottom|right|end" />
 
                 </FrameLayout>
