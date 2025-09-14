@@ -13,6 +13,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import com.v2ray.ang.AppConfig
 import com.v2ray.ang.R
+import com.v2ray.ang.handler.V2RayServiceManager
 import com.v2ray.ang.util.MessageUtil
 import com.v2ray.ang.util.Utils
 import java.lang.ref.SoftReference
@@ -25,14 +26,13 @@ class QSTileService : TileService() {
      * @param state The state to set.
      */
     fun setState(state: Int) {
+        qsTile?.icon = Icon.createWithResource(applicationContext, R.drawable.ic_stat_name)
         if (state == Tile.STATE_INACTIVE) {
             qsTile?.state = Tile.STATE_INACTIVE
             qsTile?.label = getString(R.string.app_name)
-            qsTile?.icon = Icon.createWithResource(applicationContext, R.drawable.ic_stat_name)
         } else if (state == Tile.STATE_ACTIVE) {
             qsTile?.state = Tile.STATE_ACTIVE
             qsTile?.label = V2RayServiceManager.getRunningServerName()
-            qsTile?.icon = Icon.createWithResource(applicationContext, R.drawable.ic_stat_name)
         }
 
         qsTile?.updateTile()
@@ -45,7 +45,11 @@ class QSTileService : TileService() {
     override fun onStartListening() {
         super.onStartListening()
 
-        setState(Tile.STATE_INACTIVE)
+        if (V2RayServiceManager.isRunning()) {
+            setState(Tile.STATE_ACTIVE)
+        } else {
+            setState(Tile.STATE_INACTIVE)
+        }
         mMsgReceive = ReceiveMessageHandler(this)
         val mFilter = IntentFilter(AppConfig.BROADCAST_ACTION_ACTIVITY)
         ContextCompat.registerReceiver(applicationContext, mMsgReceive, mFilter, Utils.receiverFlags())

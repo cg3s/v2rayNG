@@ -4,6 +4,7 @@ import com.v2ray.ang.AppConfig
 import com.v2ray.ang.dto.NetworkType
 import com.v2ray.ang.dto.ProfileItem
 import com.v2ray.ang.extension.isNotNullEmpty
+import com.v2ray.ang.handler.MmkvManager
 import com.v2ray.ang.util.HttpUtil
 import com.v2ray.ang.util.Utils
 import java.net.URI
@@ -82,6 +83,7 @@ open class FmtBase {
         config.publicKey = queryParam["pbk"]
         config.shortId = queryParam["sid"]
         config.spiderX = queryParam["spx"]
+        config.mldsa65Verify = queryParam["pqv"]
         config.flow = queryParam["flow"]
     }
 
@@ -100,6 +102,7 @@ open class FmtBase {
         config.publicKey.let { if (it.isNotNullEmpty()) dicQuery["pbk"] = it.orEmpty() }
         config.shortId.let { if (it.isNotNullEmpty()) dicQuery["sid"] = it.orEmpty() }
         config.spiderX.let { if (it.isNotNullEmpty()) dicQuery["spx"] = it.orEmpty() }
+        config.mldsa65Verify.let { if (it.isNotNullEmpty()) dicQuery["pqv"] = it.orEmpty() }
         config.flow.let { if (it.isNotNullEmpty()) dicQuery["flow"] = it.orEmpty() }
 
         val networkType = NetworkType.fromString(config.network)
@@ -151,7 +154,19 @@ open class FmtBase {
     }
 
     fun getServerAddress(profileItem: ProfileItem): String {
-        return HttpUtil.toIdnDomain(profileItem.server.orEmpty())
-    }
+        if (Utils.isPureIpAddress(profileItem.server.orEmpty())) {
+            return profileItem.server.orEmpty()
+        }
 
+        val domain = HttpUtil.toIdnDomain(profileItem.server.orEmpty())
+        if (MmkvManager.decodeSettingsString(AppConfig.PREF_OUTBOUND_DOMAIN_RESOLVE_METHOD, "1") != "2") {
+            return domain
+        }
+        //Resolve and replace domain
+        val resolvedIps = HttpUtil.resolveHostToIP(domain, MmkvManager.decodeSettingsBool(AppConfig.PREF_PREFER_IPV6))
+        if (resolvedIps.isNullOrEmpty()) {
+            return domain
+        }
+        return resolvedIps.first()
+    }
 }
